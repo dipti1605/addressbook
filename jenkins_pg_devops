@@ -3,8 +3,8 @@ pipeline {
             label 'master'
         }
         tools {
-            maven 'myMaven'
-            jdk 'myJava'
+            maven 'mymaven'
+            jdk 'myjava'
         }
     stages {
 
@@ -38,6 +38,7 @@ pipeline {
       }
 
         stage ('JUNIT Test') {
+            when{ expression {return env.TEST.contains('YES') || return env.ALL.contains('YES')}}
             steps{
                 sh """
                 mvn test
@@ -64,3 +65,5 @@ pipeline {
       }   
 
 }
+
+
